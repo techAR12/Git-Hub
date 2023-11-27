@@ -3,6 +3,7 @@ package com.example.todo.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.catalina.connector.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +52,12 @@ public class TodoController {
 	   if(task.isPresent()) return ResponseEntity.status(200).body(task.get());
 	   logger.info("task with id " +id+" is not pressent hence returning null");
 	   return ResponseEntity.status(400).body(null);
+   }
+   @PostMapping("/updateTask")
+   public ResponseEntity<String> updateTask(@RequestBody Task task){
+	   if(todoService.updateTask(task)) {
+		   return ResponseEntity.status(200).body("Task Updated");
+	   }
+	   return ResponseEntity.status(400).body("Task Not Found");
    }
 }
