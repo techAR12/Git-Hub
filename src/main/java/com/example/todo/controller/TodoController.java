@@ -52,4 +52,10 @@ public class TodoController {
 	   logger.info("task with id " +id+" is not pressent hence returning null");
 	   return ResponseEntity.status(400).body(null);
    }
+   @GetMapping("/deleteTask/{id}")
+   public ResponseEntity<String> deleteTask(@PathVariable(value="id",required = true) int id){
+	 if(todoService.deleteTask(id))
+	    return ResponseEntity.status(200).body("Task Deleted Successfully");
+	 return ResponseEntity.status(400).body("Task not found");
+   }
 }

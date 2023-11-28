@@ -45,4 +45,14 @@ public class TodoServicesImpl implements TodoServices{
 		return singleTask;
 	}
 
+	@Override
+	public boolean deleteTask(int id) {
+		// TODO Auto-generated method stub
+		if(todoDao.findById(id).isPresent()) {
+			todoDao.deleteById(id);
+			return true;
+		}
+		return false;
+	}
+
 }

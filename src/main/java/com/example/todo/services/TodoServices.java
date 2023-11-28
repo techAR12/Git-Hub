@@ -13,4 +13,6 @@ public interface TodoServices {
    
    public Optional<Task> getTaskById(int id);
 
+public boolean deleteTask(int id);
+
 }
