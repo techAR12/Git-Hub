@@ -14,5 +14,5 @@ public interface TodoServices {
    
    public Optional<Task> getTaskById(int id);
 
-   public boolean updateTask(Task task); 
+   public boolean updateTask(Task task, int id); 
 }

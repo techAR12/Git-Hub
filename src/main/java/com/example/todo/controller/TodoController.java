@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.todo.entity.Task;
@@ -54,8 +55,11 @@ public class TodoController {
 	   return ResponseEntity.status(400).body(null);
    }
    @PostMapping("/updateTask")
-   public ResponseEntity<String> updateTask(@RequestBody Task task){
-	   if(todoService.updateTask(task)) {
+   public ResponseEntity<String> updateTask(@RequestBody Task task , @RequestParam(value= "id",required=true) int id){
+	   logger.info("Received request to update task {}",task);
+	   
+	   if(todoService.updateTask(task,id)) {
+		   logger.info("Updating task which have id {}",task.getId());
 		   return ResponseEntity.status(200).body("Task Updated");
 	   }
 	   return ResponseEntity.status(400).body("Task Not Found");

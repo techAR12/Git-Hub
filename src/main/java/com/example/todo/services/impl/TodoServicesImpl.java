@@ -47,10 +47,11 @@ public class TodoServicesImpl implements TodoServices{
 	}
 
 	@Override
-	public boolean updateTask(Task task) {
+	public boolean updateTask(Task task,int id) {
 		// TODO Auto-generated method stub
 		// 1 - valid or Invalid
-		if(todoDao.findById(task.getId()).isPresent()) {
+		if(todoDao.findById(id).isPresent()) {
+			task.setId(id);
 			todoDao.save(task);
 			return true;
 		}
