@@ -41,8 +41,21 @@ public class TodoServicesImpl implements TodoServices{
 		// TODO Auto-generated method stub
 		logger.info("logging id from servicimp class "+id);
 		Optional<Task> singleTask = todoDao.findById(id);
+		
 		logger.info("While searching  recored for id "+id);
 		return singleTask;
+	}
+
+	@Override
+	public boolean updateTask(Task task,int id) {
+		// TODO Auto-generated method stub
+		// 1 - valid or Invalid
+		if(todoDao.findById(id).isPresent()) {
+			task.setId(id);
+			todoDao.save(task);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
